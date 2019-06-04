@@ -9,12 +9,6 @@ sudo apt-get update
 sudo apt-get install osquery
 ```
 
-Persist and start the service:
-```
-sudo systemctl enable osquery
-sudo systemctl start osquery
-```
-
 Open the osquery command line interface:
 
 ```
