@@ -1,5 +1,5 @@
 # Install OSQuery with Kolide
-To install osquery on Ubuntu, you can run the following:
+The following guide covers the installation of osquery and the configuration of the osquery daemon to connect it back to a Kolide fleet instance.
 
 ```
 export OSQUERY_KEY=1484120AC4E9F8A1A577AEEE97A80C63C9D8B80B
@@ -9,7 +9,7 @@ sudo apt-get update
 sudo apt-get install osquery
 ```
 
-## Capture enrollment secret & cert
+## 1. Capture the Enrollment Details
 -  Navigate to:
 ```
 https://<KOLIDE_HOSTNAME>:8080/hosts/manage
@@ -20,11 +20,18 @@ Add New Host
 ```
 - Take note of the `Enroll Secret`. You will need it.
 
-Download and store the certificate:
+![upload](https://github.com/sophos-cybersecurity/osquery-workshop/raw/master/images/2.png)
 
-- Click `Fletch Field Certificate`.
+- Download and store the certificate. Click:
 
-## Upload certificate to target host
+```
+Fletch Field Certificate
+```
+It will download a PEM file with a name based upon your kolide hostname. e.g. `uvo1cddxern2ff8nwkl.vm.cld.sr_8080.pem`
+
+## 2. Upload certificate to target host
+
+We need to upload the certificate to the target host before we can configure the OSQuery daemon. You have two options here:
 
 ### Option 1
 
@@ -53,7 +60,7 @@ Copy the certificate to the osquery config directory:
 sudo cp Uploads/<KOLIDE_HOSTNAME>_8080.pem /var/osquery/server.pem
 ```
 
-## Configure OSQuery daemon
+## 3. Configure OSQuery daemon
 
 Store the `enrollment secret` on disk. It will look something like this:
 
@@ -93,3 +100,7 @@ sudo systemctl start osqueryd
 ```
 
 If everything is okay, you should see your host populate into the Kolide dashboard.
+
+Note: you will need to repeat steps 2 and 3 to each host you intend to connect to osquery.
+
+Logs are available in `/var/log/osquery/*` for troubleshooting.
