@@ -1,6 +1,7 @@
 
 ```
-,"file_paths": {
+,
+  "file_paths": {
     "tmp": [
       "/tmp/.%%"
     ],
@@ -10,7 +11,7 @@
       "/usr/sbin"
     ],
     "roots keys": [
-      "/root/.ssh/authorized_keys",
-    ],
+      "/root/.ssh/authorized_keys"
+    ]
   }
 ```
