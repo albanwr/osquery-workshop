@@ -32,7 +32,7 @@ scp XXXX sysadmin@<hostname>:
 
 If you do not have access to a ssh client, you can also upload the file via the web console in CloudShare.
 
-![upload](https://raw.githubusercontent.com/sophos-cybersecurity/osquery-workshop/master/images/1.png)
+![upload](https://raw.githubusercontent.com/sophos-cybersecurity/osquery-workshop/blob/master/images/1.png)
 
 Persist and start the service:
 ```
