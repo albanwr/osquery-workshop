@@ -27,8 +27,8 @@ sudo apt-get install mysql-server redis-server -y
 When asked for MySQL's root password, enter `toor` for the sake of this tutorial if you are having trouble thinking of a better password for the MySQL root user. If you decide to set your own password, be mindful that you will need to substitute it every time `toor` is used in this document.
 
 ```
-sudo systemctl enable mysql-server.service
-sudo systemctl start mysql-server.service
+sudo systemctl enable mysql.service
+sudo systemctl start mysql.service
 sudo systemctl enable redis-server.service
 sudo systemctl start redis-server.service
 ```
@@ -61,7 +61,7 @@ Before we can run the server, we need to generate some TLS keying material. If y
 sudo mkdir /etc/kolide
 sudo openssl genrsa -out /etc/kolide/server.key 4096
 sudo openssl req -new -key /etc/kolide/server.key -out /etc/kolide/server.csr
-sudo openssl x509 -req -days 366 -in /etc/kolide/server.csr -signkey /etc/kolide/server.key -out /tmp/server.cert
+sudo openssl x509 -req -days 366 -in /etc/kolide/server.csr -signkey /etc/kolide/server.key -out /etc/kolide/server.cert
 ```
 
 You should now have three new files in `/etc/kolide`:
