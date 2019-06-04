@@ -84,7 +84,7 @@ $ /usr/bin/fleet serve \
   --logging_json
 ```
 
-You will be prompted to add a value for `--auth_jwt_key`. A randomly generated key will be suggested, you can simply add the flag with the sugested key.
+You will be prompted to add a value for `--auth_jwt_key`. A randomly generated key will be suggested, you can simply add the flag with the sugested key and run the command again.
 
 Now, if you go to [https://<CLOUDSHARE_HOSTNAME>:8080](https://localhost:8080) in your local browser, you should be redirected to [https://<CLOUDSHARE_HOSTNAME>:8080/setup](https://localhost:8080/setup) where you can create your first Fleet user account.
 

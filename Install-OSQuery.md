@@ -9,6 +9,31 @@ sudo apt-get update
 sudo apt-get install osquery
 ```
 
+# Capture enrollment secret & cert
+-  Navigate to:
+```
+https://<KOLIDE_HOSTNAME>:8080/hosts/manage
+```
+- Click:
+```
+Add New Host
+```
+- Take note of the `Enroll Secret`. You will need it.
+
+Download and store the certificate:
+
+- Click `Fletch Field Certificate`.
+
+Upload the certificate to the target host:
+
+```
+scp XXXX sysadmin@<hostname>:
+```
+
+If you do not have access to a ssh client, you can also upload the file via the web console in CloudShare.
+
+![upload](https://raw.githubusercontent.com/sophos-cybersecurity/osquery-workshop/master/images/1.png)
+
 Persist and start the service:
 ```
 sudo systemctl enable osquery
