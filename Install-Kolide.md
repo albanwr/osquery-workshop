@@ -8,8 +8,9 @@ In this guide, we're going to install Kolide Fleet and all of it's application d
 To install Fleet, run the following:
 
 ```
-wget https://dl.kolide.co/bin/fleet_latest.zip
-unzip fleet_latest.zip 'linux/*' -d fleet
+wget https://github.com/kolide/fleet/releases/latest/download/fleet.zip
+sudo apt install unzip
+unzip fleet.zip 'linux/*' -d fleet
 sudo cp fleet/linux/fleet /usr/bin/fleet
 sudo cp fleet/linux/fleetctl /usr/bin/fleetctl
 ```
@@ -24,7 +25,7 @@ To install the MySQL server and redis, run the following:
 sudo apt-get install mysql-server redis-server -y
 ```
 
-When asked for MySQL's root password, enter `toor` for the sake of this tutorial if you are having trouble thinking of a better password for the MySQL root user. If you decide to set your own password, be mindful that you will need to substitute it every time `toor` is used in this document.
+When asked for MySQL's root password, enter a password that you will remember something better than `HorseBatteryStable`. If you decide to set your own password, be mindful that you will need to substitute it every time `HorseBatteryStable` is used in this document.
 
 ```
 sudo systemctl enable mysql.service
@@ -36,7 +37,7 @@ sudo systemctl start redis-server.service
 It's also worth creating a MySQL database for us to use at this point. Run the following to create the `kolide` database in MySQL. Note that you will be prompted for the password you created above.
 
 ```
-$ echo 'CREATE DATABASE kolide;' | mysql -u root -p
+echo 'CREATE DATABASE kolide;' | mysql -u root -p 
 ```
 
 ## Running the Fleet server
@@ -44,11 +45,11 @@ $ echo 'CREATE DATABASE kolide;' | mysql -u root -p
 Now that we have installed Fleet, MySQL, and Redis, we are ready to launch Fleet! First, we must "prepare" the database. We do this via `fleet prepare db`:
 
 ```
-$ /usr/bin/fleet prepare db \
+/usr/bin/fleet prepare db \
     --mysql_address=127.0.0.1:3306 \
     --mysql_database=kolide \
     --mysql_username=root \
-    --mysql_password=toor
+    --mysql_password=HorseBatteryStable
 ```
 
 The output should look like:
@@ -66,6 +67,10 @@ sudo openssl x509 -req -days 366 -in /etc/kolide/server.csr -signkey /etc/kolide
 
 You should now have three new files in `/etc/kolide`:
 
+```
+ls /etc/kolide
+```
+
 - `server.cert`
 - `server.key`
 - `server.csr`
@@ -77,7 +82,7 @@ $ /usr/bin/fleet serve \
   --mysql_address=127.0.0.1:3306 \
   --mysql_database=kolide \
   --mysql_username=root \
-  --mysql_password=toor \
+  --mysql_password=HorseBatteryStable \
   --redis_address=127.0.0.1:6379 \
   --server_cert=/etc/kolide/server.cert \
   --server_key=/etc/kolide/server.key \
@@ -85,6 +90,18 @@ $ /usr/bin/fleet serve \
 ```
 
 You will be prompted to add a value for `--auth_jwt_key`. A randomly generated key will be suggested, you can simply add the flag with the sugested key and run the command again.
-
+```
+$ /usr/bin/fleet serve \
+  --mysql_address=127.0.0.1:3306 \
+  --mysql_database=kolide \
+  --mysql_username=root \
+  --mysql_password=HorseBatteryStable \
+  --redis_address=127.0.0.1:6379 \
+  --server_cert=/etc/kolide/server.cert \
+  --server_key=/etc/kolide/server.key \
+  --auth_jwt_key=replace_with_suggested_key
+  --logging_json
+  
+```
 Now, if you go to [https://<CLOUDSHARE_HOSTNAME>:8080](https://localhost:8080) in your local browser, you should be redirected to [https://<CLOUDSHARE_HOSTNAME>:8080/setup](https://localhost:8080/setup) where you can create your first Fleet user account.
 
